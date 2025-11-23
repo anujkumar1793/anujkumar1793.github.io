@@ -4,12 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anuj | Portfolio</title>
+    
     <style>
+        /*==========================
+          THEME VARIABLES
+        ==========================*/
+        :root {
+            --bg-color: #0d1117;
+            --fg-color: #e6edf3;
+            --card-bg: #161b22;
+            --accent: #58a6ff;
+            --border: #30363d;
+            --header-bg: #161b22;
+        }
+
+        /* Light Theme */
+        body.light {
+            --bg-color: #ffffff;
+            --fg-color: #0d1117;
+            --card-bg: #f0f0f0;
+            --accent: #005cc5;
+            --border: #d0d0d0;
+            --header-bg: #f7f7f7;
+        }
+
+        /*==========================
+          GLOBAL STYLE
+        ==========================*/
         body {
             margin: 0;
             font-family: Arial, Helvetica, sans-serif;
-            background: #0d1117;
-            color: #e6edf3;
+            background: var(--bg-color);
+            color: var(--fg-color);
+            transition: background 0.3s, color 0.3s;
         }
 
         header {
@@ -17,32 +44,54 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #161b22;
+            background: var(--header-bg);
             position: sticky;
             top: 0;
+            border-bottom: 1px solid var(--border);
         }
 
         header h1 {
             margin: 0;
             font-size: 24px;
-            color: #58a6ff;
+            color: var(--accent);
         }
 
         nav a {
             margin-left: 25px;
-            color: #c9d1d9;
+            color: var(--fg-color);
             text-decoration: none;
             font-size: 16px;
         }
 
         nav a:hover {
-            color: #58a6ff;
+            color: var(--accent);
         }
 
+        /*==========================
+          THEME TOGGLE BUTTON
+        ==========================*/
+        .theme-toggle {
+            cursor: pointer;
+            font-size: 18px;
+            background: var(--card-bg);
+            padding: 8px 14px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            color: var(--fg-color);
+            transition: 0.3s;
+        }
+        .theme-toggle:hover {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        /*==========================
+          HERO SECTION
+        ==========================*/
         .hero {
             padding: 120px 40px;
             text-align: center;
-            background: linear-gradient(180deg, #0d1117, #161b22);
+            background: linear-gradient(180deg, var(--bg-color), var(--card-bg));
         }
 
         .hero h2 {
@@ -57,6 +106,9 @@
             line-height: 1.6;
         }
 
+        /*==========================
+          SECTIONS
+        ==========================*/
         section {
             padding: 70px 40px;
         }
@@ -65,66 +117,82 @@
             text-align: center;
             font-size: 32px;
             margin-bottom: 40px;
-            color: #58a6ff;
+            color: var(--accent);
         }
 
-        .skills-container, .project-container {
+        .skills-container,
+        .project-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 25px;
         }
 
         .card {
-            background: #161b22;
+            background: var(--card-bg);
             padding: 20px;
             border-radius: 10px;
-            border: 1px solid #30363d;
+            border: 1px solid var(--border);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
         }
 
         .card h3 {
-            color: #58a6ff;
+            color: var(--accent);
         }
 
+        /*==========================
+          FOOTER
+        ==========================*/
         footer {
             text-align: center;
             padding: 30px;
-            background: #161b22;
+            background: var(--header-bg);
             margin-top: 40px;
+            border-top: 1px solid var(--border);
         }
 
         .contact a {
-            color: #58a6ff;
+            color: var(--accent);
             text-decoration: none;
         }
     </style>
 </head>
+
 <body>
 
     <header>
         <h1>Anuj</h1>
-        <nav>
-            <a href="#about">About</a>
-            <a href="#skills">Skills</a>
-            <a href="#projects">Projects</a>
-            <a href="#contact">Contact</a>
-        </nav>
+
+        <div>
+            <nav style="display:inline;">
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </nav>
+
+            <button class="theme-toggle" id="themeBtn">🌙 Dark</button>
+        </div>
     </header>
 
     <div class="hero">
         <h2>Hello, I'm Anuj 👋</h2>
         <p>
             OSS Engineer at Siemens • DevOps Learner • Cloud Enthusiast  
-            Passionate about collaborating on <strong>AWS</strong>, <strong>CI/CD</strong>, 
-            and automation projects.
+            Collaboration enthusiast for <strong>AWS</strong> and <strong>CI/CD</strong> projects.
         </p>
     </div>
 
     <section id="about">
         <h2 class="section-title">About Me</h2>
         <p style="max-width: 800px; margin: auto; text-align: center; line-height: 1.7;">
-            I am currently working as an OSS Engineer at Siemens.  
+            I am currently working as an OSS Engineer at Siemens.
             My primary interests lie in DevOps, cloud technologies, and automation.  
-            I enjoy building reliable systems, optimizing deployments, and learning modern tools.  
+            I enjoy building reliable systems, optimizing deployments, and learning modern tools.
             I am always open to collaborating on exciting AWS and CI/CD pipeline projects.
         </p>
     </section>
@@ -181,6 +249,33 @@
     <footer>
         © 2025 Anuj • Portfolio Website
     </footer>
+
+    <!-- ==========================
+         TOGGLE SCRIPT
+    ========================== -->
+    <script>
+        const themeBtn = document.getElementById('themeBtn');
+        const body = document.body;
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            body.classList.add('light');
+            themeBtn.textContent = "🌙 Dark";
+        }
+
+        themeBtn.addEventListener('click', () => {
+            body.classList.toggle('light');
+
+            if (body.classList.contains('light')) {
+                themeBtn.textContent = "🌙 Dark";
+                localStorage.setItem('theme', 'light');
+            } else {
+                themeBtn.textContent = "☀️ Light";
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+    </script>
 
 </body>
 </html>
