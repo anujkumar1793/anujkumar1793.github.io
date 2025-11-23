@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anuj | Portfolio</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #0d1117;
+            color: #e6edf3;
+        }
+
+        header {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #161b22;
+            position: sticky;
+            top: 0;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #58a6ff;
+        }
+
+        nav a {
+            margin-left: 25px;
+            color: #c9d1d9;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        nav a:hover {
+            color: #58a6ff;
+        }
+
+        .hero {
+            padding: 120px 40px;
+            text-align: center;
+            background: linear-gradient(180deg, #0d1117, #161b22);
+        }
+
+        .hero h2 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: auto;
+            line-height: 1.6;
+        }
+
+        section {
+            padding: 70px 40px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 40px;
+            color: #58a6ff;
+        }
+
+        .skills-container, .project-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: #161b22;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #30363d;
+        }
+
+        .card h3 {
+            color: #58a6ff;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: #161b22;
+            margin-top: 40px;
+        }
+
+        .contact a {
+            color: #58a6ff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Anuj</h1>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <h2>Hello, I'm Anuj 👋</h2>
+        <p>
+            OSS Engineer at Siemens • DevOps Learner • Cloud Enthusiast  
+            Passionate about collaborating on <strong>AWS</strong>, <strong>CI/CD</strong>, 
+            and automation projects.
+        </p>
+    </div>
+
+    <section id="about">
+        <h2 class="section-title">About Me</h2>
+        <p style="max-width: 800px; margin: auto; text-align: center; line-height: 1.7;">
+            I am currently working as an OSS Engineer at Siemens.  
+            My primary interests lie in DevOps, cloud technologies, and automation.  
+            I enjoy building reliable systems, optimizing deployments, and learning modern tools.  
+            I am always open to collaborating on exciting AWS and CI/CD pipeline projects.
+        </p>
+    </section>
+
+    <section id="skills">
+        <h2 class="section-title">Skills</h2>
+        <div class="skills-container">
+            <div class="card">
+                <h3>DevOps</h3>
+                <p>CI/CD • Jenkins • Git • GitHub Actions • Docker</p>
+            </div>
+            <div class="card">
+                <h3>AWS</h3>
+                <p>EC2 • S3 • IAM • CloudWatch • Lambda</p>
+            </div>
+            <div class="card">
+                <h3>Linux & Tools</h3>
+                <p>Shell Scripting • Monitoring • Troubleshooting</p>
+            </div>
+            <div class="card">
+                <h3>Other Skills</h3>
+                <p>Networking • Python Basics • Automation</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2 class="section-title">Projects</h2>
+        <div class="project-container">
+            <div class="card">
+                <h3>AWS S3 Hosting Project</h3>
+                <p>Hosted a static website on AWS S3 with CloudFront distribution for performance and caching.</p>
+            </div>
+            <div class="card">
+                <h3>CI/CD Pipeline</h3>
+                <p>Built a CI/CD pipeline using GitHub Actions deploying Dockerized applications.</p>
+            </div>
+            <div class="card">
+                <h3>Monitoring Setup</h3>
+                <p>Configured system monitoring using Prometheus & Grafana for real-time visualization.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Contact Me</h2>
+        <p class="contact" style="text-align: center; font-size: 18px;">
+            Email: <a href="mailto:Dev.anujkumar@proton.me">Dev.anujkumar@proton.me</a><br>
+            GitHub: <a href="https://github.com/anujkumar1793">github.com/anujkumar1793</a><br>
+            LinkedIn: <a href="https://linkedin.com/in/anujkumar1793">linkedin.com/in/anuj</a>
+        </p>
+    </section>
+
+    <footer>
+        © 2025 Anuj • Portfolio Website
+    </footer>
+
+</body>
+</html>
