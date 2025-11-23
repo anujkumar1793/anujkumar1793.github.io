@@ -4,39 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anuj | Portfolio</title>
-    
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
     <style>
-        /*==========================
-          THEME VARIABLES
-        ==========================*/
+        /* ======================
+           THEME VARIABLES
+        ====================== */
         :root {
-            --bg-color: #0d1117;
+            --primary: #3B82F6;
+            --secondary: #6366F1;
+            --bg-color: #0f172a;
             --fg-color: #e6edf3;
-            --card-bg: #161b22;
-            --accent: #58a6ff;
-            --border: #30363d;
-            --header-bg: #161b22;
+            --card-bg: #1e293b;
+            --header-bg: #1e293b;
+            --border: #334155;
         }
 
-        /* Light Theme */
         body.light {
-            --bg-color: #ffffff;
-            --fg-color: #0d1117;
-            --card-bg: #f0f0f0;
-            --accent: #005cc5;
-            --border: #d0d0d0;
-            --header-bg: #f7f7f7;
+            --primary: #3B82F6;
+            --secondary: #6366F1;
+            --bg-color: #f8fafc;
+            --fg-color: #0f172a;
+            --card-bg: #ffffff;
+            --header-bg: #ffffff;
+            --border: #cbd5e1;
         }
 
-        /*==========================
-          GLOBAL STYLE
-        ==========================*/
+        /* ======================
+           GLOBAL STYLE
+        ====================== */
+        * { box-sizing: border-box; }
         body {
             margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: 'Inter', sans-serif;
             background: var(--bg-color);
             color: var(--fg-color);
-            transition: background 0.3s, color 0.3s;
+            transition: background 0.4s, color 0.4s;
+            scroll-behavior: smooth;
         }
 
         header {
@@ -48,28 +53,24 @@
             position: sticky;
             top: 0;
             border-bottom: 1px solid var(--border);
+            z-index: 1000;
         }
 
         header h1 {
             margin: 0;
             font-size: 24px;
-            color: var(--accent);
+            color: var(--primary);
         }
 
         nav a {
             margin-left: 25px;
             color: var(--fg-color);
             text-decoration: none;
-            font-size: 16px;
+            font-weight: 600;
+            transition: color 0.3s;
         }
+        nav a:hover { color: var(--secondary); }
 
-        nav a:hover {
-            color: var(--accent);
-        }
-
-        /*==========================
-          THEME TOGGLE BUTTON
-        ==========================*/
         .theme-toggle {
             cursor: pointer;
             font-size: 18px;
@@ -79,49 +80,46 @@
             border: 1px solid var(--border);
             color: var(--fg-color);
             transition: 0.3s;
+            margin-left: 20px;
         }
         .theme-toggle:hover {
-            background: var(--accent);
+            background: var(--primary);
             color: #fff;
         }
 
-        /*==========================
-          HERO SECTION
-        ==========================*/
+        /* ======================
+           HERO
+        ====================== */
         .hero {
             padding: 120px 40px;
             text-align: center;
             background: linear-gradient(180deg, var(--bg-color), var(--card-bg));
         }
+        .hero h2 { font-size: 48px; margin-bottom: 10px; }
+        .hero p { font-size: 20px; max-width: 700px; margin: auto; line-height: 1.6; }
 
-        .hero h2 {
-            font-size: 48px;
-            margin-bottom: 10px;
-        }
-
-        .hero p {
-            font-size: 20px;
-            max-width: 700px;
-            margin: auto;
-            line-height: 1.6;
-        }
-
-        /*==========================
-          SECTIONS
-        ==========================*/
+        /* ======================
+           SECTIONS
+        ====================== */
         section {
             padding: 70px 40px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .section-title {
             text-align: center;
             font-size: 32px;
             margin-bottom: 40px;
-            color: var(--accent);
+            color: var(--primary);
         }
 
-        .skills-container,
-        .project-container {
+        .skills-container, .project-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 25px;
@@ -134,19 +132,15 @@
             border: 1px solid var(--border);
             transition: 0.3s;
         }
-
         .card:hover {
             transform: translateY(-5px);
-            border-color: var(--accent);
+            border-color: var(--secondary);
         }
+        .card h3 { color: var(--secondary); }
 
-        .card h3 {
-            color: var(--accent);
-        }
-
-        /*==========================
-          FOOTER
-        ==========================*/
+        /* ======================
+           FOOTER
+        ====================== */
         footer {
             text-align: center;
             padding: 30px;
@@ -154,27 +148,48 @@
             margin-top: 40px;
             border-top: 1px solid var(--border);
         }
+        .contact a { color: var(--primary); text-decoration: none; }
 
-        .contact a {
-            color: var(--accent);
-            text-decoration: none;
+        /* ======================
+           BACK TO TOP
+        ====================== */
+        #backToTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 50px;
+            font-size: 18px;
+            cursor: pointer;
+            display: none;
+            z-index: 100;
+            transition: 0.3s;
+        }
+        #backToTop:hover { background: var(--secondary); }
+
+        /* ======================
+           RESPONSIVE
+        ====================== */
+        @media (max-width: 768px) {
+            header { flex-direction: column; align-items: flex-start; }
+            nav { margin-top: 10px; }
         }
     </style>
 </head>
-
 <body>
 
     <header>
         <h1>Anuj</h1>
-
         <div>
-            <nav style="display:inline;">
+            <nav>
                 <a href="#about">About</a>
                 <a href="#skills">Skills</a>
                 <a href="#projects">Projects</a>
                 <a href="#contact">Contact</a>
             </nav>
-
             <button class="theme-toggle" id="themeBtn">🌙 Dark</button>
         </div>
     </header>
@@ -200,40 +215,19 @@
     <section id="skills">
         <h2 class="section-title">Skills</h2>
         <div class="skills-container">
-            <div class="card">
-                <h3>DevOps</h3>
-                <p>CI/CD • Jenkins • Git • GitHub Actions • Docker</p>
-            </div>
-            <div class="card">
-                <h3>AWS</h3>
-                <p>EC2 • S3 • IAM • CloudWatch • Lambda</p>
-            </div>
-            <div class="card">
-                <h3>Linux & Tools</h3>
-                <p>Shell Scripting • Monitoring • Troubleshooting</p>
-            </div>
-            <div class="card">
-                <h3>Other Skills</h3>
-                <p>Networking • Python Basics • Automation</p>
-            </div>
+            <div class="card"><h3>DevOps</h3><p>CI/CD • Jenkins • Git • GitHub Actions • Docker</p></div>
+            <div class="card"><h3>AWS</h3><p>EC2 • S3 • IAM • CloudWatch • Lambda</p></div>
+            <div class="card"><h3>Linux & Tools</h3><p>Shell Scripting • Monitoring • Troubleshooting</p></div>
+            <div class="card"><h3>Other Skills</h3><p>Networking • Python Basics • Automation</p></div>
         </div>
     </section>
 
     <section id="projects">
         <h2 class="section-title">Projects</h2>
         <div class="project-container">
-            <div class="card">
-                <h3>AWS S3 Hosting Project</h3>
-                <p>Hosted a static website on AWS S3 with CloudFront distribution for performance and caching.</p>
-            </div>
-            <div class="card">
-                <h3>CI/CD Pipeline</h3>
-                <p>Built a CI/CD pipeline using GitHub Actions deploying Dockerized applications.</p>
-            </div>
-            <div class="card">
-                <h3>Monitoring Setup</h3>
-                <p>Configured system monitoring using Prometheus & Grafana for real-time visualization.</p>
-            </div>
+            <div class="card"><h3>AWS S3 Hosting Project</h3><p>Hosted a static website on AWS S3 with CloudFront distribution for performance and caching.</p></div>
+            <div class="card"><h3>CI/CD Pipeline</h3><p>Built a CI/CD pipeline using GitHub Actions deploying Dockerized applications.</p></div>
+            <div class="card"><h3>Monitoring Setup</h3><p>Configured system monitoring using Prometheus & Grafana for real-time visualization.</p></div>
         </div>
     </section>
 
@@ -246,35 +240,49 @@
         </p>
     </section>
 
-    <footer>
-        © 2025 Anuj • Portfolio Website
-    </footer>
+    <footer>© 2025 Anuj • Portfolio Website</footer>
 
-    <!-- ==========================
-         TOGGLE SCRIPT
-    ========================== -->
+    <button id="backToTop" title="Back to top">↑</button>
+
+    <!-- ======================
+         SCRIPTS
+    ====================== -->
     <script>
+        // THEME TOGGLE
         const themeBtn = document.getElementById('themeBtn');
         const body = document.body;
-
-        // Load saved theme
         const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'light') {
-            body.classList.add('light');
-            themeBtn.textContent = "🌙 Dark";
-        }
 
-        themeBtn.addEventListener('click', () => {
+        if(savedTheme === 'light') { body.classList.add('light'); themeBtn.textContent="🌙 Dark"; }
+        else { themeBtn.textContent="☀️ Light"; }
+
+        themeBtn.addEventListener('click', ()=>{
             body.classList.toggle('light');
-
-            if (body.classList.contains('light')) {
-                themeBtn.textContent = "🌙 Dark";
-                localStorage.setItem('theme', 'light');
-            } else {
-                themeBtn.textContent = "☀️ Light";
-                localStorage.setItem('theme', 'dark');
+            if(body.classList.contains('light')) { 
+                themeBtn.textContent="🌙 Dark"; 
+                localStorage.setItem('theme','light'); 
+            } else { 
+                themeBtn.textContent="☀️ Light"; 
+                localStorage.setItem('theme','dark'); 
             }
         });
+
+        // BACK TO TOP BUTTON
+        const backBtn = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if(window.scrollY > 300) backBtn.style.display = 'block';
+            else backBtn.style.display = 'none';
+        });
+        backBtn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+        // FADE-IN SECTIONS ON SCROLL
+        const sections = document.querySelectorAll('section');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.2 });
+        sections.forEach(section => observer.observe(section));
     </script>
 
 </body>
