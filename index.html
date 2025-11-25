@@ -72,7 +72,18 @@
             color: var(--secondary);
         }
 
-        /* THEME TOGGLE FLOAT BUTTON */
+        /* REMOVE UNDERLINE ONLY IN CONTACT SECTION */
+        #contact a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        #contact a:hover {
+            text-decoration: none;
+            color: var(--secondary);
+        }
+
+        /* THEME BUTTON */
         .theme-toggle {
             position: fixed;
             top: 80px;
@@ -90,12 +101,6 @@
         .theme-toggle:hover {
             background: var(--primary);
             color: #fff;
-        }
-
-        @media (max-width: 768px) {
-            .theme-toggle {
-                top: 15px;
-            }
         }
 
         /* HERO */
@@ -134,7 +139,7 @@
             color: var(--primary);
         }
 
-        /* GRIDS */
+        /* GRID CARDS */
         .skills-container, .project-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -153,11 +158,12 @@
             border-color: var(--secondary);
         }
 
-        /* Restore Purple Headings */
+        /* headings stay purple */
         .card h3 {
             color: var(--secondary) !important;
         }
 
+        /* FOOTER */
         footer {
             text-align: center;
             padding: 25px;
@@ -212,7 +218,6 @@
 
 <body>
 
-<!-- FLOATING THEME BUTTON -->
 <button class="theme-toggle" id="themeBtn">🌙 Dark</button>
 
 <header>
@@ -220,8 +225,8 @@
     <nav>
         <a href="#about">About</a>
         <a href="#skills">Skills</a>
-        <a href="%projects">Projects</a>
-        <a href="%contact">Contact</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
     </nav>
 </header>
 
@@ -233,7 +238,10 @@
 <section id="about">
     <h2 class="section-title">About Me</h2>
     <p style="max-width: 800px; margin: auto; text-align: center; line-height: 1.7;">
-        I am currently working as an OSS Engineer at Siemens. My primary interests lie in DevOps, cloud technologies, and automation. I enjoy building reliable systems, optimizing deployments, and learning modern tools. I am always open to collaborating on exciting AWS and CI/CD pipeline projects.
+        I am currently working as an OSS Engineer at Siemens, specializing in Microsoft 365 and Azure. 
+        With 1.6+ years of experience in operations support and system engineering, I enjoy optimizing deployments, 
+        building reliable systems, and working on cloud & automation projects. I actively explore DevOps tools, AWS services, 
+        and CI/CD pipelines, and I am always open to collaborating on modern cloud and automation initiatives.
     </p>
 </section>
 
@@ -328,7 +336,7 @@
     });
     backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-    // FADE-IN EFFECT
+    // FADE-IN ANIMATION
     const sections = document.querySelectorAll('section');
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
@@ -337,6 +345,18 @@
     }, { threshold: 0.2 });
 
     sections.forEach(section => observer.observe(section));
+
+    // REMOVE HASH FROM URL ON SCROLL
+    document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            const section = document.querySelector(this.getAttribute('href'));
+            section.scrollIntoView({ behavior: "smooth" });
+
+            history.replaceState(null, null, ' ');
+        });
+    });
 </script>
 
 </body>
