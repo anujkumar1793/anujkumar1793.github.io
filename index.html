@@ -178,7 +178,7 @@
             </div>
         </div>
 
-        <!-- Verified Certifications (All 5 Restored) -->
+        <!-- Verified Certifications -->
         <section class="mb-32">
             <h3 class="text-3xl font-bold mb-12 text-center italic tracking-tighter uppercase">Verified Credentials</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -205,7 +205,7 @@
             </div>
         </section>
 
-        <!-- Technical Arsenal (DevOps Logo Fixed) -->
+        <!-- Technical Arsenal -->
         <section id="experience" class="mb-32">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                 <div class="glass-card p-10 rounded-[2.5rem] text-center group hover:-translate-y-2 transition-all">
@@ -221,7 +221,6 @@
                     <p class="font-bold text-slate-300 tracking-widest text-xs uppercase">AWS</p>
                 </div>
                 <div class="glass-card p-10 rounded-[2.5rem] text-center group hover:-translate-y-2 transition-all flex flex-col items-center justify-center">
-                    <!-- High Quality Custom DevOps Logo -->
                     <svg class="w-12 h-12 mb-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M16.5 6C14.1 6 12 7.7 10.7 9.8C9.4 11.9 8.2 14 6.1 14C4.6 14 3.5 13 3.5 11.5C3.5 10 4.6 9 6.1 9C6.8 9 7.4 9.2 7.9 9.6L9.2 7.8C8.3 7.2 7.3 6.9 6.1 6.9C3.6 6.9 1.5 8.9 1.5 11.4C1.5 13.9 3.6 15.9 6.1 15.9C8.5 15.9 10.6 14.2 11.9 12.1C13.2 10 14.4 7.9 16.5 7.9C18 7.9 19.1 8.9 19.1 10.4C19.1 11.9 18 12.9 16.5 12.9C15.8 12.9 15.2 12.7 14.7 12.3L13.4 14.1C14.3 14.7 15.3 15 16.5 15C19 15 21.1 13 21.1 10.5C21.1 8 19 6 16.5 6Z" fill="#0ea5e9"/>
                     </svg>
@@ -232,7 +231,7 @@
 
     </main>
 
-    <!-- Chatbot Assistant (Fixed and Logo Updated) -->
+    <!-- Chatbot Assistant -->
     <div class="fixed bottom-8 right-8 z-[100000]">
         <button id="chatbot-toggle" class="w-16 h-16 bg-sky-600 rounded-2xl flex items-center justify-center shadow-2xl shadow-sky-500/40 hover:scale-110 active:scale-95 transition-all">
             <i data-lucide="message-square-code" class="text-white w-8 h-8"></i>
@@ -248,14 +247,14 @@
             </div>
             <div id="chat-content" class="h-80 overflow-y-auto p-5 space-y-4 text-xs terminal-container bg-slate-900/95">
                 <div class="bg-white/5 p-4 rounded-2xl rounded-tl-none border border-white/5 leading-relaxed text-slate-200">
-                    Greetings. Ask me about Siemens, AWS, certifications, or Anuj's skills.
+                    System online. Ask me about Siemens, AWS, certifications, or how to contact Anuj.
                 </div>
             </div>
             <div id="typing-indicator" class="hidden px-5 py-2 flex gap-1">
                 <div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>
             </div>
             <div class="p-4 bg-slate-950 border-t border-white/5 flex gap-2">
-                <input type="text" id="chat-input" placeholder="Message assistant..." class="bg-white/10 border border-white/5 outline-none text-xs p-3 rounded-xl w-full text-white placeholder-slate-500">
+                <input type="text" id="chat-input" placeholder="Ask for GitHub or Email..." class="bg-white/10 border border-white/5 outline-none text-xs p-3 rounded-xl w-full text-white placeholder-slate-500">
                 <button id="send-chat" class="w-10 h-10 bg-sky-600 rounded-xl flex items-center justify-center shrink-0">
                     <i data-lucide="send" class="w-4 h-4 text-white"></i>
                 </button>
@@ -263,7 +262,19 @@
         </div>
     </div>
 
+    <!-- Footer with Logos -->
     <footer class="py-20 text-center border-t border-white/5 bg-slate-950">
+        <div class="flex justify-center gap-8 mb-8">
+            <a href="https://github.com/anujkumar1793" target="_blank" class="text-slate-500 hover:text-white transition-all transform hover:scale-110">
+                <i data-lucide="github" class="w-6 h-6"></i>
+            </a>
+            <a href="https://linkedin.com/in/anujkumar1793" target="_blank" class="text-slate-500 hover:text-sky-400 transition-all transform hover:scale-110">
+                <i data-lucide="linkedin" class="w-6 h-6"></i>
+            </a>
+            <a href="mailto:Dev.anujkumar@proton.me" class="text-slate-500 hover:text-orange-400 transition-all transform hover:scale-110">
+                <i data-lucide="mail" class="w-6 h-6"></i>
+            </a>
+        </div>
         <p class="text-slate-700 text-[10px] tracking-[0.3em] uppercase font-bold">© 2026 Anuj Kumar • System Architect</p>
     </footer>
 
@@ -280,7 +291,7 @@
             'education': 'IIT KANPUR (Cloud/DevOps) | EKLAVYA UNIVERSITY',
             'skills': 'Docker, Kubernetes, AWS, Linux, CI/CD.',
             'certs': 'IBM AI, System Admin, AWS Professional, Cisco AI, Certified IT.',
-            'contact': 'Dev.anujkumar@proton.me',
+            'contact': 'Email: Dev.anujkumar@proton.me | LinkedIn: anujkumar1793',
             'clear': 'CLEAR'
         };
 
@@ -298,7 +309,7 @@
             }
         });
 
-        // --- Chatbot Logic ---
+        // --- Chatbot Logic (SMARTER REPLIES) ---
         const chatToggle = document.getElementById('chatbot-toggle');
         const chatWindow = document.getElementById('chatbot-window');
         const chatInput = document.getElementById('chat-input');
@@ -331,10 +342,13 @@
             chatInput.value = '';
             chatContent.scrollTop = chatContent.scrollHeight;
 
-            if (msg.includes('siemens')) botReply("Anuj is an OSS Engineer at Siemens (since May 2024).");
-            else if (msg.includes('cert') || msg.includes('certification')) botReply("Anuj has 5 certifications including IBM AI, Microsoft System Admin, and AWS Professional.");
+            if (msg.includes('siemens')) botReply("Anuj is currently an OSS Engineer at Siemens (since May 2024).");
+            else if (msg.includes('cert') || msg.includes('certification')) botReply("Anuj has 5 certifications: IBM AI, Microsoft System Admin, AWS Professional, Cisco AI, and Certified IT Professional.");
             else if (msg.includes('iit') || msg.includes('education')) botReply("He is attending IIT Kanpur for Cloud Computing & DevOps (2025-2026).");
-            else botReply("I'm here to answer questions about Anuj's professional background.");
+            else if (msg.includes('linkedin')) botReply("You can find Anuj on LinkedIn at: <a href='https://linkedin.com/in/anujkumar1793' target='_blank' class='text-sky-400 underline'>linkedin.com/in/anujkumar1793</a>");
+            else if (msg.includes('github')) botReply("Check out his projects on GitHub: <a href='https://github.com/anujkumar1793' target='_blank' class='text-sky-400 underline'>github.com/anujkumar1793</a>");
+            else if (msg.includes('mail') || msg.includes('email') || msg.includes('contact')) botReply("You can email Anuj at: <span class='text-sky-400 font-bold'>Dev.anujkumar@proton.me</span>");
+            else botReply("I'm here to help! Ask me about Anuj's skills, Siemens role, education, or contact info.");
         }
 
         document.getElementById('send-chat').onclick = handleChat;
