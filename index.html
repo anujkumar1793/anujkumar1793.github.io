@@ -37,8 +37,20 @@
         .terminal-container::-webkit-scrollbar { width: 4px; }
         .terminal-container::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
         
-        #chatbot-window { transform: translateY(20px); opacity: 0; pointer-events: none; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        #chatbot-window.active { transform: translateY(0); opacity: 1; pointer-events: all; }
+        #chatbot-window { 
+            visibility: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 100000;
+            pointer-events: none;
+        }
+        #chatbot-window.active { 
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
         
         .typing-dot { width: 4px; height: 4px; background: #94a3b8; border-radius: 50%; animation: blink 1.4s infinite; }
         .typing-dot:nth-child(2) { animation-delay: 0.2s; }
@@ -55,20 +67,19 @@
     </div>
 
     <!-- Fixed Navbar -->
-    <nav class="fixed top-0 w-full z-50 border-b border-white/5 bg-brand-dark/80 backdrop-blur-md px-6 py-4">
-        <div class="max-w-6xl mx-auto flex justify-between items-center">
+    <nav class="fixed top-0 w-full z-[1000] border-b border-white/5 bg-brand-dark/80 backdrop-blur-md px-6 py-4">
+        <div class="max-w-6xl mx-auto flex justify-between items-center h-12">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 bg-sky-600 rounded-xl flex items-center justify-center font-extrabold text-white shadow-lg shadow-sky-500/20">A</div>
                 <span class="font-extrabold tracking-tighter text-2xl uppercase">Anuj<span class="text-sky-500">.</span></span>
             </div>
             
-            <!-- Aligned Links -->
             <div class="hidden md:flex items-center gap-10">
-                <a href="#about" class="text-sm font-semibold text-slate-400 hover:text-sky-400 transition-colors pt-1">Origins</a>
-                <a href="#experience" class="text-sm font-semibold text-slate-400 hover:text-sky-400 transition-colors pt-1">Stack</a>
-                <a href="#terminal" class="text-sm font-semibold text-slate-400 hover:text-sky-400 transition-colors pt-1">System</a>
-                <a href="mailto:Dev.anujkumar@proton.me" class="bg-sky-600 text-white px-6 py-2.5 rounded-full text-sm font-bold hover:bg-sky-500 hover:scale-105 transition-all shadow-lg shadow-sky-500/20">
-                    Let's Connect
+                <a href="#about" class="text-sm font-semibold text-slate-400 hover:text-sky-400 transition-colors">Origins</a>
+                <a href="#experience" class="text-sm font-semibold text-slate-400 hover:text-sky-400 transition-colors">Stack</a>
+                <a href="#terminal" class="text-sm font-semibold text-slate-400 hover:text-sky-400 transition-colors">System</a>
+                <a href="mailto:Dev.anujkumar@proton.me" class="bg-sky-600 text-white px-6 py-2.5 rounded-full text-sm font-bold hover:bg-sky-500 transition-all shadow-lg shadow-sky-500/20 ml-4">
+                    Connect
                 </a>
             </div>
         </div>
@@ -95,20 +106,11 @@
                 </p>
                 <div class="flex flex-wrap gap-5">
                     <a href="#terminal" class="px-8 py-4 bg-white text-black font-black rounded-2xl hover:bg-sky-400 hover:-translate-y-1 transition-all flex items-center gap-2">
-                        INITIALIZE SYSTEM <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                        INITIALIZE SYSTEM <i data-lucide="terminal" class="w-4 h-4"></i>
                     </a>
-                    <div class="flex gap-3">
-                        <a href="https://github.com/anujkumar1793" class="w-14 h-14 glass-card rounded-2xl flex items-center justify-center hover:bg-white/10 transition-colors border border-white/10">
-                            <i data-lucide="github" class="w-6 h-6"></i>
-                        </a>
-                        <a href="https://linkedin.com/in/anujkumar1793" class="w-14 h-14 glass-card rounded-2xl flex items-center justify-center hover:bg-white/10 transition-colors border border-white/10 text-sky-400">
-                            <i data-lucide="linkedin" class="w-6 h-6"></i>
-                        </a>
-                    </div>
                 </div>
             </div>
 
-            <!-- Profile Frame -->
             <div class="relative group justify-self-center">
                 <div class="absolute -inset-4 bg-gradient-to-tr from-sky-500 to-indigo-500 rounded-[3rem] blur-2xl opacity-20 group-hover:opacity-40 transition-opacity"></div>
                 <div class="glass-card p-4 rounded-[3rem] relative overflow-hidden">
@@ -130,24 +132,22 @@
                 </div>
                 <div id="terminal-body" class="p-8 font-mono text-sm h-[400px] overflow-y-auto terminal-container bg-[#050810]">
                     <div class="text-sky-500 mb-4 opacity-70">>> ANUJ_OS [Version 2.0.26] Initialized...</div>
-                    <div class="text-slate-400 mb-6 italic">Type 'help' to see available system commands.</div>
                     <div id="terminal-output"></div>
                     <div class="flex items-center gap-3 mt-4">
                         <span class="text-sky-500 font-bold">visitor@cloud:~$</span>
-                        <input type="text" id="terminal-input" autofocus class="bg-transparent border-none outline-none text-white w-full" autocomplete="off">
+                        <input type="text" id="terminal-input" class="bg-transparent border-none outline-none text-white w-full" autocomplete="off" placeholder="Type 'help'...">
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Experience & Education Bento -->
+        <!-- Bento Experience -->
         <div class="grid md:grid-cols-3 gap-6 mb-32">
-            <!-- Experience -->
             <div class="md:col-span-2 glass-card p-8 rounded-[2.5rem] neon-border transition-all">
                 <h3 class="text-2xl font-bold mb-8 flex items-center gap-3"><i data-lucide="milestone" class="text-sky-500"></i> Experience</h3>
                 <div class="space-y-8">
                     <div class="relative pl-8 border-l-2 border-sky-500/30">
-                        <div class="absolute w-4 h-4 bg-sky-500 rounded-full -left-[9px] top-1 shadow-[0_0_10px_#0ea5e9]"></div>
+                        <div class="absolute w-4 h-4 bg-sky-500 rounded-full -left-[9px] top-1"></div>
                         <h4 class="font-bold text-xl uppercase tracking-tighter">Siemens</h4>
                         <p class="text-sky-400 font-bold text-sm mb-3">OSS Engineer • May 2024 - Present</p>
                         <p class="text-slate-400 text-sm leading-relaxed">Driving system monitoring, issue resolution, and workflow optimization to maintain peak operational efficiency.</p>
@@ -155,58 +155,57 @@
                     <div class="relative pl-8 border-l-2 border-white/10">
                         <div class="absolute w-4 h-4 bg-slate-700 rounded-full -left-[9px] top-1"></div>
                         <h4 class="font-bold text-xl uppercase tracking-tighter">Niva Bupa</h4>
-                        <p class="text-slate-400 font-bold text-sm mb-3">Support Engineer • 2023 - 2024</p>
+                        <p class="text-slate-400 font-bold text-sm mb-3">Support Engineer • Mar 2023 - May 2024</p>
                         <p class="text-slate-500 text-sm leading-relaxed">Infrastructure maintenance and high-priority technical support for health-tech ecosystems.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Education -->
             <div class="glass-card p-8 rounded-[2.5rem] neon-border transition-all">
-                <h3 class="text-2xl font-bold mb-8 flex items-center gap-3"><i data-lucide="graduation-cap" class="text-sky-500"></i> Education</h3>
+                <h3 class="text-2xl font-bold mb-8 flex items-center gap-3 text-white"><i data-lucide="graduation-cap" class="text-sky-500"></i> Education</h3>
                 <div class="space-y-8">
                     <div>
                         <h4 class="font-bold text-white tracking-tighter uppercase">IIT Kanpur</h4>
-                        <p class="text-sky-400 text-xs font-bold mb-2">Cloud & DevOps (Cert)</p>
-                        <p class="text-slate-500 text-[10px]">2025 - 2026</p>
+                        <p class="text-sky-400 text-xs font-bold mb-2">Cloud Computing & DevOps</p>
+                        <p class="text-slate-500 text-[10px]">May 2025 - March 2026</p>
                     </div>
                     <div>
                         <h4 class="font-bold text-white tracking-tighter uppercase">Eklavya University</h4>
                         <p class="text-slate-400 text-xs font-bold mb-2">B.Sc. Computer Science</p>
-                        <p class="text-slate-500 text-[10px]">2022 - 2025</p>
+                        <p class="text-slate-500 text-[10px]">Aug 2022 - Oct 2025</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Certifications Section -->
+        <!-- Verified Certifications (All 5 Restored) -->
         <section class="mb-32">
             <h3 class="text-3xl font-bold mb-12 text-center italic tracking-tighter uppercase">Verified Credentials</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="glass-card p-5 rounded-2xl flex items-center gap-4 border-l-4 border-indigo-500">
-                    <i data-lucide="award" class="text-indigo-400 shrink-0"></i>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="glass-card p-5 rounded-2xl flex items-center gap-4 border-l-4 border-blue-500">
+                    <i data-lucide="shield-check" class="text-blue-400 shrink-0"></i>
                     <span class="text-sm font-semibold">IBM AI Fundamentals</span>
                 </div>
                 <div class="glass-card p-5 rounded-2xl flex items-center gap-4 border-l-4 border-sky-500">
-                    <i data-lucide="award" class="text-sky-400 shrink-0"></i>
-                    <span class="text-sm font-semibold">AWS Certified Professional</span>
-                </div>
-                <div class="glass-card p-5 rounded-2xl flex items-center gap-4 border-l-4 border-blue-500">
-                    <i data-lucide="award" class="text-blue-400 shrink-0"></i>
-                    <span class="text-sm font-semibold">MS System Admin (LinkedIn)</span>
-                </div>
-                <div class="glass-card p-5 rounded-2xl flex items-center gap-4 border-l-4 border-green-500">
-                    <i data-lucide="award" class="text-green-400 shrink-0"></i>
-                    <span class="text-sm font-semibold">Cisco A.I. Fundamentals</span>
+                    <i data-lucide="shield-check" class="text-sky-400 shrink-0"></i>
+                    <span class="text-sm font-semibold">Microsoft System Admin</span>
                 </div>
                 <div class="glass-card p-5 rounded-2xl flex items-center gap-4 border-l-4 border-orange-500">
-                    <i data-lucide="award" class="text-orange-400 shrink-0"></i>
-                    <span class="text-sm font-semibold">Certified IT Professional</span>
+                    <i data-lucide="shield-check" class="text-orange-400 shrink-0"></i>
+                    <span class="text-sm font-semibold">AWS Professional</span>
+                </div>
+                <div class="glass-card p-5 rounded-2xl flex items-center gap-4 border-l-4 border-green-500">
+                    <i data-lucide="shield-check" class="text-green-400 shrink-0"></i>
+                    <span class="text-sm font-semibold">Cisco A.I. Fundamentals</span>
+                </div>
+                <div class="glass-card p-5 rounded-2xl flex items-center gap-4 border-l-4 border-indigo-500 lg:col-span-2 lg:justify-center">
+                    <i data-lucide="shield-check" class="text-indigo-400 shrink-0"></i>
+                    <span class="text-sm font-semibold text-center">Certified IT Professional</span>
                 </div>
             </div>
         </section>
 
-        <!-- Technical Stack -->
+        <!-- Technical Arsenal (DevOps Logo Fixed) -->
         <section id="experience" class="mb-32">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                 <div class="glass-card p-10 rounded-[2.5rem] text-center group hover:-translate-y-2 transition-all">
@@ -221,19 +220,22 @@
                     <i class="devicon-amazonwebservices-plain-wordmark colored text-5xl mb-4 inline-block"></i>
                     <p class="font-bold text-slate-300 tracking-widest text-xs uppercase">AWS</p>
                 </div>
-                <div class="glass-card p-10 rounded-[2.5rem] text-center group hover:-translate-y-2 transition-all">
-                    <i class="devicon-linux-plain colored text-5xl mb-4 inline-block"></i>
-                    <p class="font-bold text-slate-300 tracking-widest text-xs uppercase">Linux</p>
+                <div class="glass-card p-10 rounded-[2.5rem] text-center group hover:-translate-y-2 transition-all flex flex-col items-center justify-center">
+                    <!-- High Quality Custom DevOps Logo -->
+                    <svg class="w-12 h-12 mb-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16.5 6C14.1 6 12 7.7 10.7 9.8C9.4 11.9 8.2 14 6.1 14C4.6 14 3.5 13 3.5 11.5C3.5 10 4.6 9 6.1 9C6.8 9 7.4 9.2 7.9 9.6L9.2 7.8C8.3 7.2 7.3 6.9 6.1 6.9C3.6 6.9 1.5 8.9 1.5 11.4C1.5 13.9 3.6 15.9 6.1 15.9C8.5 15.9 10.6 14.2 11.9 12.1C13.2 10 14.4 7.9 16.5 7.9C18 7.9 19.1 8.9 19.1 10.4C19.1 11.9 18 12.9 16.5 12.9C15.8 12.9 15.2 12.7 14.7 12.3L13.4 14.1C14.3 14.7 15.3 15 16.5 15C19 15 21.1 13 21.1 10.5C21.1 8 19 6 16.5 6Z" fill="#0ea5e9"/>
+                    </svg>
+                    <p class="font-bold text-slate-300 tracking-widest text-xs uppercase">DevOps</p>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <!-- Chatbot Assistant -->
-    <div class="fixed bottom-8 right-8 z-[100]">
+    <!-- Chatbot Assistant (Fixed and Logo Updated) -->
+    <div class="fixed bottom-8 right-8 z-[100000]">
         <button id="chatbot-toggle" class="w-16 h-16 bg-sky-600 rounded-2xl flex items-center justify-center shadow-2xl shadow-sky-500/40 hover:scale-110 active:scale-95 transition-all">
-            <i data-lucide="bot" class="text-white w-8 h-8"></i>
+            <i data-lucide="message-square-code" class="text-white w-8 h-8"></i>
         </button>
         
         <div id="chatbot-window" class="absolute bottom-24 right-0 w-80 glass-card rounded-[2rem] overflow-hidden shadow-2xl border border-white/10">
@@ -242,19 +244,19 @@
                     <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
                     <span class="text-sm tracking-tight uppercase">Anuj's Assistant</span>
                 </div>
-                <button id="close-chat" class="hover:rotate-90 transition-transform"><i data-lucide="x" class="w-4 h-4"></i></button>
+                <button id="close-chat"><i data-lucide="x" class="w-4 h-4"></i></button>
             </div>
-            <div id="chat-content" class="h-80 overflow-y-auto p-5 space-y-4 text-xs terminal-container bg-slate-900/50">
-                <div class="bg-white/5 p-4 rounded-2xl rounded-tl-none border border-white/5 leading-relaxed">
-                    System online. I can provide details on Anuj's roles at Siemens, his IIT education, or his tech stack. What would you like to know?
+            <div id="chat-content" class="h-80 overflow-y-auto p-5 space-y-4 text-xs terminal-container bg-slate-900/95">
+                <div class="bg-white/5 p-4 rounded-2xl rounded-tl-none border border-white/5 leading-relaxed text-slate-200">
+                    Greetings. Ask me about Siemens, AWS, certifications, or Anuj's skills.
                 </div>
             </div>
             <div id="typing-indicator" class="hidden px-5 py-2 flex gap-1">
                 <div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>
             </div>
-            <div class="p-4 bg-slate-900/80 border-t border-white/5 flex gap-2">
-                <input type="text" id="chat-input" placeholder="Ask about Siemens or AWS..." class="bg-white/5 border-none outline-none text-xs p-3 rounded-xl w-full text-white">
-                <button id="send-chat" class="w-10 h-10 bg-sky-600 rounded-xl flex items-center justify-center hover:bg-sky-500 transition-colors">
+            <div class="p-4 bg-slate-950 border-t border-white/5 flex gap-2">
+                <input type="text" id="chat-input" placeholder="Message assistant..." class="bg-white/10 border border-white/5 outline-none text-xs p-3 rounded-xl w-full text-white placeholder-slate-500">
+                <button id="send-chat" class="w-10 h-10 bg-sky-600 rounded-xl flex items-center justify-center shrink-0">
                     <i data-lucide="send" class="w-4 h-4 text-white"></i>
                 </button>
             </div>
@@ -262,11 +264,6 @@
     </div>
 
     <footer class="py-20 text-center border-t border-white/5 bg-slate-950">
-        <div class="flex justify-center gap-8 mb-8 text-slate-500">
-            <a href="https://github.com/anujkumar1793" class="hover:text-sky-400 transition-colors"><i data-lucide="github"></i></a>
-            <a href="https://linkedin.com/in/anujkumar1793" class="hover:text-sky-400 transition-colors"><i data-lucide="linkedin"></i></a>
-            <a href="mailto:Dev.anujkumar@proton.me" class="hover:text-sky-400 transition-colors"><i data-lucide="mail"></i></a>
-        </div>
         <p class="text-slate-700 text-[10px] tracking-[0.3em] uppercase font-bold">© 2026 Anuj Kumar • System Architect</p>
     </footer>
 
@@ -276,72 +273,72 @@
         // --- Terminal Engine ---
         const termInput = document.getElementById('terminal-input');
         const termOutput = document.getElementById('terminal-output');
-        
         const commands = {
             'help': 'Available: [about, experience, education, skills, certs, clear, contact]',
-            'about': 'OSS Engineer at Siemens. Cloud Enthusiast. Specializing in high-availability systems.',
-            'experience': 'SIEMENS (Present) - OSS Engineer | NIVA BUPA (2023-24) - Support Engineer',
-            'education': 'IIT KANPUR (Cloud/DevOps) | EKLAVYA UNIVERSITY (B.Sc Computer Science)',
-            'skills': 'Docker, Kubernetes, AWS, Linux, CI/CD, Shell Scripting.',
-            'certs': 'IBM AI, Microsoft SysAdmin, AWS, Cisco AI, Certified IT Prof.',
-            'contact': 'Secure Channel: Dev.anujkumar@proton.me',
+            'about': 'OSS Engineer at Siemens. Infrastructure specialist.',
+            'experience': 'SIEMENS (Present) | NIVA BUPA (2023-24)',
+            'education': 'IIT KANPUR (Cloud/DevOps) | EKLAVYA UNIVERSITY',
+            'skills': 'Docker, Kubernetes, AWS, Linux, CI/CD.',
+            'certs': 'IBM AI, System Admin, AWS Professional, Cisco AI, Certified IT.',
+            'contact': 'Dev.anujkumar@proton.me',
             'clear': 'CLEAR'
         };
 
         termInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
                 const cmd = termInput.value.toLowerCase().trim();
-                const response = commands[cmd] || `Error: Command '${cmd}' not recognized. Type 'help'.`;
-                
-                if (response === 'CLEAR') {
-                    termOutput.innerHTML = '';
-                } else {
+                const response = commands[cmd] || `Unknown command: '${cmd}'`;
+                if (response === 'CLEAR') termOutput.innerHTML = '';
+                else {
                     termOutput.innerHTML += `<div class="mt-4"><span class="text-sky-500">➜</span> <span class="text-white">${cmd}</span></div>`;
                     termOutput.innerHTML += `<div class="text-slate-400 mt-1 ml-4 border-l border-white/10 pl-4">${response}</div>`;
                 }
-                
                 termInput.value = '';
                 document.getElementById('terminal-body').scrollTop = document.getElementById('terminal-body').scrollHeight;
             }
         });
 
-        // --- AI Bot Engine ---
+        // --- Chatbot Logic ---
         const chatToggle = document.getElementById('chatbot-toggle');
         const chatWindow = document.getElementById('chatbot-window');
-        const chatContent = document.getElementById('chat-content');
         const chatInput = document.getElementById('chat-input');
+        const chatContent = document.getElementById('chat-content');
         const typingIndicator = document.getElementById('typing-indicator');
 
-        chatToggle.onclick = () => chatWindow.classList.toggle('active');
+        chatToggle.addEventListener('click', () => {
+            chatWindow.classList.toggle('active');
+            if (chatWindow.classList.contains('active')) {
+                setTimeout(() => chatInput.focus(), 300);
+            }
+        });
+
         document.getElementById('close-chat').onclick = () => chatWindow.classList.remove('active');
 
         function botReply(text) {
             typingIndicator.classList.remove('hidden');
+            chatContent.scrollTop = chatContent.scrollHeight;
             setTimeout(() => {
                 typingIndicator.classList.add('hidden');
-                chatContent.innerHTML += `<div class="bg-white/5 p-4 rounded-2xl rounded-tl-none border border-white/5 leading-relaxed">${text}</div>`;
+                chatContent.innerHTML += `<div class="bg-white/5 p-4 rounded-2xl rounded-tl-none border border-white/5 text-slate-200">${text}</div>`;
                 chatContent.scrollTop = chatContent.scrollHeight;
-            }, 1000);
+            }, 800);
         }
 
         function handleChat() {
             const msg = chatInput.value.toLowerCase().trim();
             if (!msg) return;
-
             chatContent.innerHTML += `<div class="bg-sky-600/20 p-4 rounded-2xl rounded-tr-none ml-auto text-right border border-sky-500/20">${msg}</div>`;
             chatInput.value = '';
             chatContent.scrollTop = chatContent.scrollHeight;
 
-            if (msg.includes('siemens')) botReply("Anuj is currently an OSS Engineer at Siemens (since May 2024). He focuses on IT operations and system monitoring.");
-            else if (msg.includes('iit') || msg.includes('education')) botReply("Anuj is pursuing a Professional Certificate in Cloud Computing & DevOps from IIT Kanpur (2025-2026).");
-            else if (msg.includes('aws') || msg.includes('cloud') || msg.includes('skill')) botReply("He is highly skilled in AWS, Docker, and Kubernetes. He's also an AWS Certified professional.");
-            else if (msg.includes('cert') || msg.includes('certification')) botReply("He holds certifications from IBM (AI), Microsoft (SysAdmin), Cisco (AI), and more.");
-            else if (msg.includes('hi') || msg.includes('hello')) botReply("Hello! I'm here to help you navigate Anuj's professional portfolio. Ask me about his work or skills!");
-            else botReply("I'm not sure about that. Try asking 'What is his role at Siemens?' or 'Tell me about his education'.");
+            if (msg.includes('siemens')) botReply("Anuj is an OSS Engineer at Siemens (since May 2024).");
+            else if (msg.includes('cert') || msg.includes('certification')) botReply("Anuj has 5 certifications including IBM AI, Microsoft System Admin, and AWS Professional.");
+            else if (msg.includes('iit') || msg.includes('education')) botReply("He is attending IIT Kanpur for Cloud Computing & DevOps (2025-2026).");
+            else botReply("I'm here to answer questions about Anuj's professional background.");
         }
 
         document.getElementById('send-chat').onclick = handleChat;
-        chatInput.onkeydown = (e) => e.key === 'Enter' && handleChat();
+        chatInput.onkeydown = (e) => { if (e.key === 'Enter') handleChat(); };
     </script>
 </body>
 </html>
